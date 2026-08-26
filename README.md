@@ -91,7 +91,31 @@ takes their stake back.
 cd hardhat
 pnpm install
 cp .env.example .env
+npx hardhat test
 ```
+
+The test suite is the fastest way to see the whole thing work. It needs no network and no
+funded account: the Ritual system contracts and precompiles are stood up as mocks and
+installed at their canonical addresses, so the contract under test is unmodified.
+
+```bash
+cd web
+pnpm install
+cp .env.example .env.local
+pnpm dev
+```
+
+---
+
+## Layout
+
+```
+hardhat/   the contract, its mocks, 54 Solidity tests, 2 end-to-end TypeScript tests,
+           and the deploy / fund / status scripts
+web/       the market UI and the demo oracle the markets read
+```
+
+Full runbooks live in [hardhat/README.md](hardhat/README.md) and [web/README.md](web/README.md).
 
 ---
 
@@ -100,6 +124,12 @@ cp .env.example .env
 Intentionally not included: an AMM, an order book, an order-matching engine, governance, a separate
 ERC-20, a centralized resolver, or an upgrade proxy. Staking uses the chain's native asset and the
 betting model is plain pari-mutuel: two running totals and one mapping per side.
+
+**The oracle is not trustless.** `createMarket` takes any URL, and whoever creates a market picks
+the endpoint that decides it. The TEE guarantees the response was fetched as specified and not
+tampered with in transit; it guarantees nothing about whether the endpoint is telling the truth.
+That is a real limit, not a detail to gloss over, and it is why the demo oracle reports the source
+of every number it returns.
 
 ## Reference
 
