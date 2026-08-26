@@ -129,9 +129,9 @@ export function CreateMarket({ onCreated }: { onCreated: () => void }) {
               Connect a wallet first.
             </span>
           ) : null}
-          {hash ? (
+          {hash && explorerTx(hash) ? (
             <a
-              href={explorerTx(hash)}
+              href={explorerTx(hash)!}
               target="_blank"
               rel="noreferrer"
               className="text-sm font-700 text-[var(--color-accent)] underline"

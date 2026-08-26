@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import { demoOracleUrl } from "@/lib/chain";
+import { demoOracleUrl, isLocalChain } from "@/lib/chain";
 import { Badge, Card, Stat } from "./ui";
 
 type Reading = { price: number; source: string; asOf: string };
@@ -38,7 +38,9 @@ export function OracleCard() {
     };
   }, []);
 
-  const isLocal = LOCAL.test(demoOracleUrl);
+  // On a local node the precompiles are mocks, so nothing ever fetches this URL and
+  // the warning would be misleading.
+  const isLocal = !isLocalChain && LOCAL.test(demoOracleUrl);
 
   return (
     <Card>
@@ -80,6 +82,13 @@ export function OracleCard() {
       <p className="mt-5 break-all rounded-md border border-[var(--color-border)] bg-[var(--color-canvas)] px-3 py-2 font-mono text-xs font-600">
         {demoOracleUrl}
       </p>
+
+      {isLocalChain ? (
+        <p className="mt-3 text-sm font-600 text-[var(--color-muted)]">
+          Local node: the HTTP and jq precompiles are mocks, so markets resolve against
+          whatever hardhat/scripts/local-seed.ts set, not against this endpoint.
+        </p>
+      ) : null}
 
       {isLocal ? (
         <p className="mt-3 text-sm font-600 text-[var(--color-no)]">

@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
 import { WagmiProvider } from "wagmi";
 
-import { ritualChain } from "@/lib/chain";
+import { activeChain } from "@/lib/chain";
 
 import "@rainbow-me/rainbowkit/styles.css";
 
@@ -14,7 +14,7 @@ import "@rainbow-me/rainbowkit/styles.css";
 const config = getDefaultConfig({
   appName: "Ritual Predict",
   projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID ?? "ritual-predict-demo",
-  chains: [ritualChain],
+  chains: [activeChain],
   ssr: true,
 });
 
@@ -25,7 +25,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         {/* initialChain makes the wallet switch to Ritual on connect. */}
-        <RainbowKitProvider initialChain={ritualChain}>{children}</RainbowKitProvider>
+        <RainbowKitProvider initialChain={activeChain}>{children}</RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>
   );

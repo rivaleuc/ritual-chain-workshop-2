@@ -214,9 +214,9 @@ export function MarketCard({
           </p>
         ) : null}
 
-        {hash ? (
+        {hash && explorerTx(hash) ? (
           <a
-            href={explorerTx(hash)}
+            href={explorerTx(hash)!}
             target="_blank"
             rel="noreferrer"
             className="mt-3 inline-block text-sm font-700 text-[var(--color-accent)] underline"

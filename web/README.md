@@ -27,6 +27,24 @@ cloudflared tunnel --url http://localhost:3000
 Then set `NEXT_PUBLIC_DEMO_ORACLE_URL` to the public address. The UI shows a warning
 while the configured URL is still local.
 
+## Seeing it work without the chain
+
+Ritual Chain is unreachable, so the UI can talk to a local Hardhat node instead:
+
+```bash
+cd ../hardhat && npx hardhat node                                  # terminal 1
+npx hardhat run scripts/local-seed.ts --network localhost          # terminal 2
+```
+
+The seed script prints the contract address and the `.env.local` lines to paste. Set
+`NEXT_PUBLIC_CHAIN=local` and the UI points at chain 31337 instead of Ritual, with four
+markets already on it: two open, one resolved with winnings to claim, one invalid with
+refunds waiting. Add the node to your wallet as chain 31337 at http://127.0.0.1:8545 and
+import one of the account keys the node printed to use the claim buttons.
+
+On a local node the precompiles are mocks, so markets resolve against whatever the seed
+script set rather than against this app's oracle route. The oracle card says so.
+
 ## Configuration
 
 Copy `.env.example` to `.env.local`. `NEXT_PUBLIC_PREDICT_ADDRESS` comes from

@@ -7,7 +7,7 @@ import { Header } from "@/components/Header";
 import { Markets } from "@/components/Markets";
 import { OracleCard } from "@/components/OracleCard";
 import { Card } from "@/components/ui";
-import { explorerAddress, predictAddress } from "@/lib/chain";
+import { activeChain, explorerAddress, predictAddress } from "@/lib/chain";
 
 export default function Home() {
   const [refreshKey, setRefreshKey] = useState(0);
@@ -41,9 +41,11 @@ export default function Home() {
       </div>
 
       <footer className="border-t border-[var(--color-border)] pt-6 text-sm font-500 text-[var(--color-muted)]">
-        {predictAddress ? (
+        {!predictAddress ? (
+          "Not deployed yet."
+        ) : explorerAddress(predictAddress) ? (
           <a
-            href={explorerAddress(predictAddress)}
+            href={explorerAddress(predictAddress)!}
             target="_blank"
             rel="noreferrer"
             className="font-700 text-[var(--color-accent)] underline"
@@ -51,7 +53,9 @@ export default function Home() {
             Contract on the explorer
           </a>
         ) : (
-          "Not deployed yet."
+          <span className="font-mono">
+            {activeChain.name}, {predictAddress}
+          </span>
         )}
       </footer>
     </main>
