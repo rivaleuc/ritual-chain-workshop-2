@@ -111,9 +111,15 @@ pnpm dev
 
 ```
 hardhat/   the contract, its mocks, 54 Solidity tests, 2 end-to-end TypeScript tests,
-           and the deploy / fund / status scripts
+           the deploy / fund / status scripts, and the local-node demo and seed scripts
 web/       the market UI and the demo oracle the markets read
 ```
+
+Ritual Chain was unreachable while this was built, so nothing here has been deployed to
+it. The whole lifecycle runs locally instead, against mocks installed at the canonical
+Ritual addresses. Captured output is in
+[hardhat/docs/local-run.md](hardhat/docs/local-run.md), along with a short statement of
+what that does and does not establish.
 
 Full runbooks live in [hardhat/README.md](hardhat/README.md) and [web/README.md](web/README.md).
 
