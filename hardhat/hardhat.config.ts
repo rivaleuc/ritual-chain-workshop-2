@@ -30,6 +30,15 @@ export default defineConfig({
       type: "edr-simulated",
       chainType: "l1",
     },
+    // A `npx hardhat node` running in another terminal. Used by the local demo and
+    // seed scripts, which stand the Ritual system contracts up as mocks so the whole
+    // lifecycle can be exercised without chain access. Accounts come from the node.
+    localhost: {
+      type: "http",
+      chainType: "l1",
+      chainId: 31337,
+      url: "http://127.0.0.1:8545",
+    },
     // Ritual Chain testnet. Requires EIP-1559 (type-2) transactions; viem sends
     // those by default.
     ritual: {
