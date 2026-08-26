@@ -10,5 +10,15 @@
     "hardhat": "^3.13.0",
     "typescript": "~6.0.3",
     "viem": "^2.55.16"
+  },
+  "scripts": {
+    "build": "hardhat build",
+    "test": "hardhat test",
+    "test:solidity": "hardhat test solidity",
+    "test:e2e": "hardhat test nodejs",
+    "typecheck": "tsc --noEmit",
+    "node": "hardhat node",
+    "deploy": "hardhat run scripts/deploy.ts",
+    "export-abi": "hardhat build && hardhat run scripts/export-abi.ts"
   }
 }

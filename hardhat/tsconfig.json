@@ -6,6 +6,11 @@
     "skipLibCheck": true,
     "outDir": "dist",
     "types": ["node"],
-    "verbatimModuleSyntax": true
+    "verbatimModuleSyntax": true,
+    // Hardhat 3 runs TypeScript directly, and every local import in scripts/ and
+    // test/ is written with an explicit .ts extension.
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "strict": true
   }
 }
