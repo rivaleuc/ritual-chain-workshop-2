@@ -1,0 +1,5 @@
+# Optional native addons with pure-JS fallbacks. Nothing here needs to compile.
+allowBuilds:
+  bufferutil: false
+  keccak: false
+  utf-8-validate: false
